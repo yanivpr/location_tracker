@@ -25,9 +25,13 @@ module FetchRoutes
 
   def uncompress(raw_data)
     uncompressed_data = {}
-    File.open('tmpzipfile', 'wb') { |zip_file| zip_file.write(raw_data) }
+    tmp_file_name = "tmpzipfile_#{rand(100)}"
 
-    Zip::File.open('tmpzipfile') do |zip_file|
+    File.open(tmp_file_name, 'wb') do |zip_file|
+      zip_file.write(raw_data)
+    end
+
+    Zip::File.open(tmp_file_name) do |zip_file|
       zip_file.each do |entry|
         if required_files.include?(entry.name)
           uncompressed_data[entry.name] = entry.get_input_stream.read
@@ -35,7 +39,7 @@ module FetchRoutes
       end
     end
 
-    File.delete('tmpzipfile')
+    File.delete(tmp_file_name)
 
     uncompressed_data
   end
