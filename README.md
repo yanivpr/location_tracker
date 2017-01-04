@@ -14,8 +14,5 @@ bundle exec rspec
 ## what is missing
 - error handling (fail download, fail import, retry)
 - validation of possible node names
-- specs for the download module
-- specs for the import module
 - functional test - mock download data and expect a specific upload
 - passphrase in environment variable instead of plain text in code
-- extract CSV reading module

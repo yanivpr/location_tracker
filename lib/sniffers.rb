@@ -1,12 +1,13 @@
 require_relative 'source_names'
 require_relative 'fetch_routes'
+require_relative 'csv_parser'
 require_relative 'route'
-require 'csv'
 require 'uri'
 require 'time'
 
 class Sniffers
   include FetchRoutes
+  include CSVParser
 
   # Fetch sniffers routes
   # @return [Route] parsed routes
@@ -16,9 +17,9 @@ class Sniffers
     node_times_data = data[required_files[1]]
     sequences_data = data[required_files[2]]
 
-    csv_routes = to_csv(routes_data)
-    csv_node_times = to_csv(node_times_data)
-    csv_sequences = to_csv(sequences_data)
+    csv_routes = to_hash(routes_data)
+    csv_node_times = to_hash(node_times_data)
+    csv_sequences = to_hash(sequences_data)
 
     casted_routes = cast_routes(csv_routes)
     casted_node_times = cast_node_times(csv_node_times)
@@ -32,12 +33,6 @@ class Sniffers
   end
 
   private
-
-  def to_csv(raw_data)
-    csv = CSV.parse(raw_data, col_sep: ', ')
-    headers = csv.shift
-    csv.map { |value| Hash[ headers.zip(value) ] }
-  end
 
   def cast_routes(csv)
     csv.each do |row|

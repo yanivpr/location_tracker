@@ -1,17 +1,18 @@
 require_relative 'source_names'
 require_relative 'fetch_routes'
+require_relative 'csv_parser'
 require_relative 'route'
-require 'csv'
 require 'time'
 
 class Sentinels
   include FetchRoutes
+  include CSVParser
 
   # Fetch sentinels routes
   # @return [Route] parsed routes
   def fetch_routes
     data = call[required_files[0]]
-    csv = to_csv(data)
+    csv = to_hash(data)
     casted_csv = cast(csv)
     routes_sorted = start_end_nodes(casted_csv)
     to_routes(routes_sorted)
@@ -22,12 +23,6 @@ class Sentinels
   end
 
   private
-
-  def to_csv(raw_data)
-    csv = CSV.parse(raw_data, col_sep: ', ')
-    headers = csv.shift
-    csv.map { |value| Hash[ headers.zip(value) ] }
-  end
 
   def cast(csv)
     csv.each do |row|
