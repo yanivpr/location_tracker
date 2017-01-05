@@ -1,6 +1,6 @@
 # Location Tracker
 
-A ruby program that tracks routes.
+A ruby program that tracks routes, as I understood from [here](http://challenge.distribusion.com/the_one/red_pill).
 
 It downloads routes from different sources, parses them and imports to the system.
 
