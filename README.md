@@ -16,3 +16,4 @@ bundle exec rspec
 - validation of possible node names
 - functional test - mock download data and expect a specific upload
 - passphrase in environment variable instead of plain text in code
+- logging
