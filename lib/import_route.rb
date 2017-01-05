@@ -9,8 +9,8 @@ class ImportRoute
   # @param [String] source_name - one of the possible sources the system accepts.
   # @param [Route] route - an object representing a route.
   def call(source_name, route)
-    url = Configuration::SERVICE_URL
-    passphrase = Configuration::SERVICE_PASSPHRASE
+    url = Configuration.service_url
+    passphrase = Configuration.service_passphrase
     full_url = URI.encode("#{url}?#{params(route, passphrase, source_name)}")
 
     HTTParty.post(full_url)

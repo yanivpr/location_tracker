@@ -16,8 +16,8 @@ module FetchRoutes
   private
 
   def fetch_raw_routes_data
-    url = Configuration::SERVICE_URL
-    passphrase = Configuration::SERVICE_PASSPHRASE
+    url = Configuration.service_url
+    passphrase = Configuration.service_passphrase
     full_url = URI.encode("#{url}?#{params(passphrase, source_name)}")
 
     HTTParty.get(full_url).parsed_response
@@ -39,9 +39,9 @@ module FetchRoutes
       end
     end
 
-    File.delete(tmp_file_name)
-
     uncompressed_data
+  ensure
+    File.delete(tmp_file_name)
   end
 
   def params(passphrase, source_name)

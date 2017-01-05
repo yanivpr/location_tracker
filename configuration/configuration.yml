@@ -1,0 +1,2 @@
+service_url: http://challenge.distribusion.com/the_one/routes
+service_passphrase: Kans4s-i$-g01ng-by3-bye # this would be an environment variable in a real app

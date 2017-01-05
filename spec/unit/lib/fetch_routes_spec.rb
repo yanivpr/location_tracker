@@ -21,8 +21,8 @@ RSpec.describe FetchRoutes do
     end
 
     data = File.read('spec/fixtures/test.zip')
-    stub_const('Configuration::SERVICE_URL', 'some_url')
-    stub_const('Configuration::SERVICE_PASSPHRASE', 'some_passphrase')
+    allow(Configuration).to receive(:service_url).and_return('some_url')
+    allow(Configuration).to receive(:service_passphrase).and_return('some_passphrase')
 
     http_response = Object.new
     allow(HTTParty).

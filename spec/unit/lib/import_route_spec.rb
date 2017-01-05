@@ -12,8 +12,8 @@ RSpec.describe ImportRoute do
         Time.parse('2030-12-31T04:06:07+00:00'),
         Time.parse('2030-12-31T04:06:10+00:00')
       )
-      stub_const('Configuration::SERVICE_URL', 'some_url')
-      stub_const('Configuration::SERVICE_PASSPHRASE', 'some_passphrase')
+      allow(Configuration).to receive(:service_url).and_return('some_url')
+      allow(Configuration).to receive(:service_passphrase).and_return('some_passphrase')
       import_route = ImportRoute.new
 
       expect(HTTParty).
