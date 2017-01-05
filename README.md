@@ -16,7 +16,7 @@ In order to invoke downloading the routes from the various sources and import th
 ## Run specs
     bundle exec rspec
 
-## what is missing
+## Possible improvements
 - sophisticated error handling (fail download, fail import, retrying)
 - validation of route node names and times
 - passphrase in environment variable instead of plain text in code
