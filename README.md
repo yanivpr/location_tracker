@@ -12,8 +12,8 @@ bundle exec rake
 bundle exec rspec
 
 ## what is missing
-- error handling (fail download, fail import, retry)
-- validation of possible node names
+- sophisticated error handling (fail download, fail import, retrying)
+- validation of route node names and times
 - functional test - mock download data and expect a specific upload
 - passphrase in environment variable instead of plain text in code
 - logging

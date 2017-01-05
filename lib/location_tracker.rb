@@ -19,14 +19,22 @@ class LocationTracker
 
   def fetch_routes
     @sources.each_with_object({}) do |source, data|
-      data[source.source_name] = source.fetch_routes
+      begin
+        data[source.source_name] = source.fetch_routes
+      rescue StandardError => error
+        STDOUT.print("Failed to fetch routes for '#{source.source_name}'")
+      end
     end
   end
 
   def import_routes(source_names_routes)
     source_names_routes.each do |source_name, routes|
       routes.each do |route|
-        @import_route.call(source_name, route)
+        begin
+          @import_route.call(source_name, route)
+        rescue StandardError => error
+          STDOUT.print("Failed to import route '#{route.to_s}' for '#{source_name}'")
+        end
       end
     end
   end
